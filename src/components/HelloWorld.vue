@@ -7,7 +7,7 @@
 
         <v-col class="mb-5" cols="12">
             <h2 class="headline font-weight-bold mb-3">
-                What's nexjhhjhjjt?
+                What's next?
             </h2>
 
             <v-row justify="center">
