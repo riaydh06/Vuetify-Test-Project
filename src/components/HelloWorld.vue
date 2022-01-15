@@ -1,59 +1,44 @@
 <template>
-  <v-container>
+<v-container>
     <v-row class="text-center">
-      <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
-      </v-col>
+        <v-col cols="12">
+            <v-img :src="require('../assets/logo.svg')" class="my-3" contain height="200" />
+        </v-col>
 
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          What's nexjhhjhjjt?
-        </h2>
+        <v-col class="mb-5" cols="12">
+            <h2 class="headline font-weight-bold mb-3">
+                What's nexjhhjhjjt?
+            </h2>
 
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
+            <v-row justify="center">
+                <a v-for="(next, i) in ecosystem" :key="i" :href="next.href" class="subheading mx-3" target="_blank">
+                    {{ next.text }}
+                </a>
+            </v-row>
+        </v-col>
     </v-row>
-  </v-container>
+</v-container>
 </template>
 
 <script>
-  export default {
+export default {
     name: 'HelloWorld',
 
     data: () => ({
-      ecosystem: [
-        {
-          text: 'vuetify-loader',
-          href: 'https://github.com/vuetifyjs/vuetify-loader',
-        },
-        {
-          text: 'github',
-          href: 'https://github.com/vuetifyjs/vuetify',
-        },
-        {
-          text: 'awesome-vuetify',
-          href: 'https://github.com/vuetifyjs/awesome-vuetify',
-        },
-      ],
-      
+        ecosystem: [{
+                text: 'vuetify-loader',
+                href: 'https://github.com/vuetifyjs/vuetify-loader',
+            },
+            {
+                text: 'github',
+                href: 'https://github.com/vuetifyjs/vuetify',
+            },
+            {
+                text: 'awesome-vuetify',
+                href: 'https://github.com/vuetifyjs/awesome-vuetify',
+            },
+        ],
+
     }),
-  }
+}
 </script>
