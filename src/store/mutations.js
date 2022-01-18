@@ -16,13 +16,12 @@ export default {
     },
     addCar({ cars }, {name, type}) {
         cars.push({
-            id: cars.length +1,
+            id: Math.floor(Math.random() * 1000),
             name,
             type
         })
     },
     deleteCar({ cars }, {id}) {
-       console.log(cars, id)
        if (id > -1) {
         cars.splice(id, 1);
       }
@@ -31,6 +30,24 @@ export default {
         if (id > -1) {
          cars[id].name=name;
          cars[id].type=type
+       }
+     },
+     addCities({ cities }, {name, country}) {
+        cities.push({
+            id: Math.floor(Math.random() * 1000),
+            name,
+            country
+        })
+    },
+    deleteCities({ cities }, {id}) {
+       if (id > -1) {
+        cities.splice(id, 1);
+      }
+    },
+    updateCities({ cities }, {id, name, country}) {
+        if (id > -1) {
+         cities[id].name=name;
+         cities[id].country=country
        }
      },
 }

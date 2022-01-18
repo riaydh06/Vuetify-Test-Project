@@ -3,8 +3,6 @@ export default {
         {id: 1, name: 'car1', type: 'Hatchback'},
         {id: 2, name: 'car2', type: 'Sedan'},
         {id: 3, name: 'car3', type: 'Sports car'},
-        {id: 4, name: 'car4', type: 'Station wagon'},
-        {id: 5, name: 'car5', type: 'Hatchback'},
     ],
     users: [
         {id: 1, type: 'manager', name: 'manager', email: 'email@gmail.com', password: '123456'},

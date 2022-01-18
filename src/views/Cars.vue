@@ -7,7 +7,7 @@
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
-                    <v-select v-model="type" :items="items" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
+                    <v-select v-model="type" :items="types" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
 
                     <v-btn block color="success" class="mr-4" @click="addCar">
                         Submit
@@ -26,7 +26,7 @@
             <v-form  v-model="valid" lazy-validation class="px-5">
                 <v-text-field v-model="editName" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
-                <v-select v-model="editType" :items="items" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
+                <v-select v-model="editType" :items="types" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
 
                 <v-btn block color="success" class="mr-4" @click="updateCar">
                     Submit
@@ -102,7 +102,7 @@ export default {
                 v => !!v || 'Name is required',
                 v => (v && v.length <= 10) || 'Name must be less than 10 characters',
             ],
-            items: [
+            types: [
                 'Hatchback',
                 'Sedan',
                 'Station wagon',
@@ -156,15 +156,5 @@ export default {
     text-align: left;
     padding: 10px;
     transition: all 0.5s;
-}
-
-li {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-li>span {
-    flex: 1;
-    max-width: 250px;
 }
 </style>
