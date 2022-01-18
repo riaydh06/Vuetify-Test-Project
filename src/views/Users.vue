@@ -3,7 +3,7 @@
     <v-layout>
         <v-flex class="mb-15">
             <v-card class="car">
-                <h1>ADD CAR</h1>
+                <h1>ADD USER</h1>
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
@@ -20,7 +20,7 @@
     <v-dialog v-model="dialog" min-width="300">
         <v-card class="px-5 py-4">
             <v-card-title class="text-h5 grey lighten-2">
-                Update Car
+                Update User
             </v-card-title>
 
             <v-form  v-model="valid" lazy-validation class="px-5">
@@ -40,7 +40,7 @@
         <v-flex>
             <v-card class="mx-auto mb-16" tile>
                 <v-list dense>
-                    <h1>CARS LIST</h1>
+                    <h1>USER LIST</h1>
                     <v-list-item-group color="primary">
                         <v-list-item>
                             <v-list-item-content>
@@ -56,7 +56,7 @@
                                 <v-list-item>ACTION</v-list-item>
                             </v-list-item-content>
                         </v-list-item>
-                        <v-list-item v-for="(item, i) in cars" :key="i">
+                        <v-list-item v-for="(item, i) in getUser" :key="i">
                             <v-list-item-content>
                                 <v-list-item v-text="item.id"></v-list-item>
                             </v-list-item-content>
@@ -84,9 +84,6 @@
 </template>
 
 <script>
-import {
-    mapState,
-} from 'vuex';
 
 export default {
     data() {
@@ -113,14 +110,17 @@ export default {
         }
     },
 
-    computed: mapState({
-        cars: state => state.cars,
-    }),
+    computed: {
+        getUser() {
+        
+            return this.$store.state.users.filter(item => item.type === 'operator')
+        },
+    },
 
     methods: {
-        addCar() {
+        addUser() {
             this.$refs.form.validate()
-            this.$store.commit('addCar', {
+            this.$store.commit('addUser', {
                 name: this.name,
                 type: this.type
             })
@@ -128,19 +128,19 @@ export default {
             this.name = '';
             this.type = ''
         },
-        deleteCar(id) {
-            this.$store.commit('deleteCar', {
+        deleteUser(id) {
+            this.$store.commit('deleteUser', {
                 id
             })
         },
         onClickEdit(id) {
             this.id = id;
             this.dialog = true;
-            this.editName = this.cars[id].name
-            this.editType = this.cars[id].type
+            this.editName = this.getUser[id].name
+            this.editType = this.getUser[id].type
         },
-        updateCar() {
-            this.$store.commit('updateCar', {
+        updateUser() {
+            this.$store.commit('updateUser', {
                 id: this.id,
                 name: this.editName,
                 type: this.editType

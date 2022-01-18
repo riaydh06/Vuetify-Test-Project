@@ -1,4 +1,5 @@
 export default {
+    // car
     addCar({ cars }, {name, type}) {
         cars.push({
             id: Math.floor(Math.random() * 1000),
@@ -18,6 +19,7 @@ export default {
        }
      },
 
+    // cities
     addCities({ cities }, {name, country}) {
         cities.push({
             id: Math.floor(Math.random() * 1000),
@@ -34,6 +36,26 @@ export default {
         if (id > -1) {
          cities[id].name=name;
          cities[id].country=country
+       }
+    },
+    
+    // user
+    addUser({ users }, {name, country}) {
+        users.push({
+            id: Math.floor(Math.random() * 1000),
+            name,
+            country
+        })
+    },
+    deleteUser({ users }, {id}) {
+       if (id > -1) {
+        users.splice(id, 1);
+      }
+    },
+    updateUser({ users }, {id, name, country}) {
+        if (id > -1) {
+            users[id].name=name;
+            users[id].country=country
        }
     },
 }
