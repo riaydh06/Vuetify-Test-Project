@@ -1,71 +1,107 @@
 <template>
-<div class="todo">
-    <form @submit.prevent="addTodo(text); text=''">
-        <input type="checkbox" title="mark all" @change="markAllTodo(!markAll); markAll = !markAll" />
-        <input type="text" placeholder="What must be done?" v-model="text" />
-        <button> Add Todo </button>
-    </form>
-    <ul>
-        <li v-for="(todo, index) in todos" :key="index">
-            <input type="checkbox" title="mark todo" @change="markTodo(todo)" :checked="todo.completed" />
-            <span :class="{completed: todo.completed}">{{ todo.text }}</span>
-            <button @click="removeTodo(todo)">x</button>
-        </li>
-    </ul>
-    <div>
-        <a href="#" @click="clearCompleted"> clear completed </a>
-    </div>
-    show:
-    <button @click="visible = 'all'"> all </button>
-    <button @click="visible = 'completed'"> completed </button>
-    <button @click="visible = 'pending'"> pending </button>
-</div>
+<v-container>
+    <v-layout>
+        <v-flex class="car">
+            <v-form ref="form" v-model="valid" lazy-validation>
+                <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+
+                <v-select v-model="type" :items="items" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
+
+                <v-btn color="success" class="mr-4" @click="validate">
+                    Submit
+                </v-btn>
+            </v-form>
+        </v-flex>
+    </v-layout>
+    
+    <v-layout>
+        <v-flex>
+            <v-card class="mx-auto" tile>
+                <v-list dense>
+                    <v-subheader>CARS</v-subheader>
+                    <v-list-item-group color="primary">
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item>ID</v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item>NAME</v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item>TYPE</v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item>ACTION</v-list-item>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item v-for="(item, i) in cars" :key="i">
+                            <v-list-item-content>
+                                <v-list-item v-text="item.id"></v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item v-text="item.name"></v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item v-text="item.type"></v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item class="text-primary">DELETE</v-list-item>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list-item-group>
+                </v-list>
+            </v-card>
+        </v-flex>
+    </v-layout>
+</v-container>
 </template>
 
 <script>
 import {
-    mapGetters,
-    mapMutations
+    mapState,
 } from 'vuex';
 
 export default {
     data() {
         return {
-            text: '',
-            visible: 'all',
-            markAll: false
+            valid: true,
+            name: '',
+
+            type: null,
+            nameRules: [
+                v => !!v || 'Name is required',
+                v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+            ],
+            items: [
+                'Hatchback',
+                'Sedan',
+                'Station wagon',
+                'Sports car',
+                'Convertible',
+                'Coupe',
+            ],
         }
     },
 
-    computed: {
-        todos() {
-            return this.$store.getters[this.visible]
-        },
-        ...mapGetters(['pending', 'completed', 'all'])
-    },
+    computed: mapState({
+        cars: state => state.cars,
+    }),
 
-    methods: mapMutations([
-        'addTodo',
-        'removeTodo',
-        'markTodo',
-        'markAllTodo',
-        'clearCompleted'
-    ])
+    methods: {
+        validate() {
+            this.$refs.form.validate()
+        },
+    }
 }
 </script>
 
 <style>
-.todo {
+.car {
     text-align: left;
     padding: 5px;
     margin: auto;
     transition: all 0.5s;
-    max-width: 300px;
-}
-
-.completed {
-    color: #888;
-    text-decoration: line-through;
+    max-width: 500px;
 }
 
 li {
