@@ -1,71 +1,161 @@
 <template>
-<div class="todo">
-    <form @submit.prevent="addTodo(text); text=''">
-        <input type="checkbox" title="mark all" @change="markAllTodo(!markAll); markAll = !markAll" />
-        <input type="text" placeholder="What must be done?" v-model="text" />
-        <button> Add Todo </button>
-    </form>
-    <ul>
-        <li v-for="(todo, index) in todos" :key="index">
-            <input type="checkbox" title="mark todo" @change="markTodo(todo)" :checked="todo.completed" />
-            <span :class="{completed: todo.completed}">{{ todo.text }}</span>
-            <button @click="removeTodo(todo)">x</button>
-        </li>
-    </ul>
-    <div>
-        <a href="#" @click="clearCompleted"> clear completed </a>
-    </div>
-    show:
-    <button @click="visible = 'all'"> all </button>
-    <button @click="visible = 'completed'"> completed </button>
-    <button @click="visible = 'pending'"> pending </button>
-</div>
+<v-container>
+    <v-layout>
+        <v-flex class="mb-15">
+            <v-card class="car">
+                <h1>ADD CAR</h1>
+                <v-form ref="form" v-model="valid" lazy-validation>
+                    <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+
+                    <v-select v-model="type" :items="items" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
+
+                    <v-btn block color="success" class="mr-4" @click="addCar">
+                        Submit
+                    </v-btn>
+                </v-form>
+            </v-card>
+        </v-flex>
+    </v-layout>
+
+    <v-dialog v-model="dialog" min-width="300">
+        <v-card class="px-5 py-4">
+            <v-card-title class="text-h5 grey lighten-2">
+                Update Car
+            </v-card-title>
+
+            <v-form ref="form" v-model="valid" lazy-validation class="px-5">
+                <v-text-field v-model="editName" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+
+                <v-select v-model="editType" :items="items" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
+
+                <v-btn block color="success" class="mr-4" @click="updateCar">
+                    Submit
+                </v-btn>
+            </v-form>
+
+        </v-card>
+    </v-dialog>
+
+    <v-layout>
+        <v-flex>
+            <v-card class="mx-auto" tile>
+                <v-list dense>
+                    <h1>CARS LIST</h1>
+                    <v-list-item-group color="primary">
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item>ID</v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item>NAME</v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item>TYPE</v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item>ACTION</v-list-item>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item v-for="(item, i) in cars" :key="i">
+                            <v-list-item-content>
+                                <v-list-item v-text="item.id"></v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item v-text="item.name"></v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item v-text="item.type"></v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item class="text-primary">
+                                    <div class="d-flex justify-start">
+                                        <img alt="Vue logo" src="../assets/edit.png" width="18" height="18" class="mr-2" @click="onClickEdit(i)">
+                                        <img alt="Vue logo" src="../assets/remove.png" width="18" height="18" @click="deleteCar(i)">
+                                    </div>
+                                </v-list-item>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list-item-group>
+                </v-list>
+            </v-card>
+        </v-flex>
+    </v-layout>
+</v-container>
 </template>
 
 <script>
 import {
-    mapGetters,
-    mapMutations
+    mapState,
 } from 'vuex';
 
 export default {
     data() {
         return {
-            text: '',
-            visible: 'all',
-            markAll: false
+            id: 0,
+            dialog: false,
+            valid: true,
+            name: '',
+            type: null,
+            editName: '',
+            editType: null,
+            nameRules: [
+                v => !!v || 'Name is required',
+                v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+            ],
+            items: [
+                'Hatchback',
+                'Sedan',
+                'Station wagon',
+                'Sports car',
+                'Convertible',
+                'Coupe',
+            ],
         }
     },
 
-    computed: {
-        todos() {
-            return this.$store.getters[this.visible]
-        },
-        ...mapGetters(['pending', 'completed', 'all'])
-    },
+    computed: mapState({
+        cars: state => state.cars,
+    }),
 
-    methods: mapMutations([
-        'addTodo',
-        'removeTodo',
-        'markTodo',
-        'markAllTodo',
-        'clearCompleted'
-    ])
+    methods: {
+        addCar() {
+            this.$refs.form.validate()
+            this.$store.commit('addCar', {
+                name: this.name,
+                type: this.type
+            })
+            this.$refs.form.reset()
+            this.name = '';
+            this.type = ''
+        },
+        deleteCar(id) {
+            this.$store.commit('deleteCar', {
+                id
+            })
+        },
+        onClickEdit(id) {
+            this.id = id;
+            this.dialog = true;
+            this.editName = this.cars[id].name
+            this.editType = this.cars[id].type
+        },
+        updateCar() {
+            this.$store.commit('updateCar', {
+                id: this.id,
+                name: this.editName,
+                type: this.editType
+            })
+            this.dialog = false
+        }
+    }
 }
 </script>
 
 <style>
-.todo {
+.car {
     text-align: left;
-    padding: 5px;
-    margin: auto;
+    padding: 10px;
     transition: all 0.5s;
-    max-width: 300px;
-}
-
-.completed {
-    color: #888;
-    text-decoration: line-through;
 }
 
 li {
