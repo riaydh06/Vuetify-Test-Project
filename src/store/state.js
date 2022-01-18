@@ -13,12 +13,10 @@ export default {
         {id:2 , name: 'gazipur', country: 'Bangladesh'},
     ],
     reports: [
-        { id: 1, operatorId: 1, operatorName: 'operator1', date: 'operator1', time: '123456'},
-        { id: 2, operatorId: 1, operatorName: 'operator1', date: 'operator2', time: '123456'},
-        { id: 3, operatorId: 1, operatorName: 'operator1', date: 'operator3', time: '123456'},
-        { id: 4, operatorId: 1, operatorName: 'operator1', date: 'operator4', time: '123456'},
-        { id: 5, operatorId: 1, operatorName: 'operator1', date: 'operator5', time: '123456'},
-        { id: 6, operatorId: 1, operatorName: 'operator1', date: 'operator6', time: '123456'},
+        { id: 1, operatorId: 1, operatorName: 'operator1', date: '2022-01-12', time: '123456'},
+        { id: 2, operatorId: 3, operatorName: 'operator6', date: '2022-01-14', time: '123456'},
+        { id: 3, operatorId: 4, operatorName: 'operator4', date: '2022-01-16', time: '123456'},
+        { id: 4, operatorId: 6, operatorName: 'operator2', date: '2022-01-17', time: '123456'},
     ],
     trackings: [
         {id:  1, type: 'operator', position: ''},
