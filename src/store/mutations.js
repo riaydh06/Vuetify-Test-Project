@@ -40,11 +40,13 @@ export default {
     },
     
     // user
-    addUser({ users }, {name, country}) {
+    addUser({ users }, {name, email}) {
         users.push({
             id: Math.floor(Math.random() * 1000),
             name,
-            country
+            email,
+            type: 'operator',
+            password: ''
         })
     },
     deleteUser({ users }, {id}) {
@@ -52,10 +54,10 @@ export default {
         users.splice(id, 1);
       }
     },
-    updateUser({ users }, {id, name, country}) {
+    updateUser({ users }, {id, name, email}) {
         if (id > -1) {
             users[id].name=name;
-            users[id].country=country
+            users[id].email=email
        }
     },
 }
