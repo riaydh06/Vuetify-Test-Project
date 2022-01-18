@@ -18,5 +18,18 @@ export default {
         todos.map(
             todo => (todo.completed ? todos.splice(todos.indexOf(todo), 1) : null)
         )
-    }
+    },
+    addCar({ cars }, {name, type}) {
+        cars.push({
+            id: cars.length +1,
+            name,
+            type
+        })
+    },
+    deleteCar({ cars }, {id}) {
+       console.log(cars, id)
+       if (id > -1) {
+        cars.splice(id, 1);
+      }
+    },
 }

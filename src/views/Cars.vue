@@ -1,24 +1,27 @@
 <template>
 <v-container>
     <v-layout>
-        <v-flex class="car">
-            <v-form ref="form" v-model="valid" lazy-validation>
-                <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+        <v-flex class="mb-15">
+            <v-card class="car">
+                <h1>ADD CAR</h1>
+                <v-form ref="form" v-model="valid" lazy-validation>
+                    <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
-                <v-select v-model="type" :items="items" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
+                    <v-select v-model="type" :items="items" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
 
-                <v-btn color="success" class="mr-4" @click="validate">
-                    Submit
-                </v-btn>
-            </v-form>
+                    <v-btn block color="success" class="mr-4" @click="addCar">
+                        Submit
+                    </v-btn>
+                </v-form>
+            </v-card>
         </v-flex>
     </v-layout>
-    
+
     <v-layout>
         <v-flex>
             <v-card class="mx-auto" tile>
                 <v-list dense>
-                    <v-subheader>CARS</v-subheader>
+                    <h1>CARS LIST</h1>
                     <v-list-item-group color="primary">
                         <v-list-item>
                             <v-list-item-content>
@@ -45,7 +48,12 @@
                                 <v-list-item v-text="item.type"></v-list-item>
                             </v-list-item-content>
                             <v-list-item-content>
-                                <v-list-item class="text-primary">DELETE</v-list-item>
+                                <v-list-item class="text-primary">
+                                    <div class="d-flex justify-start">
+                                        <img alt="Vue logo" src="../assets/edit.png" width="18" height="18" class="mr-2">
+                                        <img alt="Vue logo" src="../assets/remove.png" width="18" height="18" @click="deleteCar(i)">
+                                    </div>
+                                </v-list-item>
                             </v-list-item-content>
                         </v-list-item>
                     </v-list-item-group>
@@ -88,9 +96,21 @@ export default {
     }),
 
     methods: {
-        validate() {
+        addCar() {
             this.$refs.form.validate()
+            this.$store.commit('addCar', {
+                name: this.name,
+                type: this.type
+            })
+            this.$refs.form.reset()
+            this.name='';
+            this.type=''
         },
+        deleteCar(id){
+            this.$store.commit('deleteCar', {
+                id
+            })
+        }
     }
 }
 </script>
@@ -98,10 +118,8 @@ export default {
 <style>
 .car {
     text-align: left;
-    padding: 5px;
-    margin: auto;
+    padding: 10px;
     transition: all 0.5s;
-    max-width: 500px;
 }
 
 li {
