@@ -36,8 +36,4 @@ export default {
          cities[id].country=country
        }
     },
-
-    filterReport({ reports }, {date, time}) {
-      return  reports.filter(item=> item.date === date || item.time ===time)
-    },
 }

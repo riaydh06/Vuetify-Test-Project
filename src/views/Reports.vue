@@ -4,8 +4,8 @@
         <v-flex class="mb-15">
             <v-card class="report">
 
-                <div class="d-flex justify-center">
-                    <div class="mr-5">
+                <div class="d-flex flex-wrap justify-center">
+                    <div class="mr-lg-5 mr-md-5">
                         <h1>Select Date</h1>
                         <v-date-picker v-model="picker"></v-date-picker>
                     </div>
@@ -14,6 +14,12 @@
                         <h1>Select Time</h1>
                         <v-time-picker v-model="timeStep" format="24hr"></v-time-picker>
                     </div>
+                </div>
+                <div class="d-flex flex-wrap justify-end">
+                    <v-btn color="success" class="mr-4" @click="clear">
+                        Clear
+                    </v-btn>
+
                 </div>
             </v-card>
         </v-flex>
@@ -39,7 +45,7 @@
                                 <v-list-item>TIME</v-list-item>
                             </v-list-item-content>
                         </v-list-item>
-                        <v-list-item v-for="(item, i) in reportsData" :key="i">
+                        <v-list-item v-for="(item, i) in filterData" :key="i">
                             <v-list-item-content>
                                 <v-list-item v-text="item.id"></v-list-item>
                             </v-list-item-content>
@@ -54,6 +60,7 @@
                             </v-list-item-content>
                         </v-list-item>
                     </v-list-item-group>
+                    <h2 class="my-5" v-if="filterData.length === 0"> No data to show</h2>
                 </v-list>
             </v-card>
         </v-flex>
@@ -62,10 +69,6 @@
 </template>
 
 <script>
-import {
-    mapState,
-} from 'vuex';
-
 export default {
     data() {
         return {
@@ -74,16 +77,21 @@ export default {
         }
     },
 
-    computed: mapState({
-        reports: state => state.reports,
-    }),
+    computed: {
+
+        filterData() {
+            const that = this
+            if (!this.picker && !this.timeStep) {
+                return this.$store.state.reports
+            }
+            return this.$store.state.reports.filter(item => item.date === that.picker || item.time === that.timeStep)
+        },
+    },
 
     methods: {
-        reportsData() {
-            return this.$store.commit('filterReport', {
-                date: this.picker,
-                time: this.timeStep
-            })
+        clear() {
+            this.picker = "";
+            this.timeStep = "";
         }
     }
 }
