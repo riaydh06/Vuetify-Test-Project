@@ -32,4 +32,10 @@ export default {
         cars.splice(id, 1);
       }
     },
+    updateCar({ cars }, {id, name, type}) {
+        if (id > -1) {
+         cars[id].name=name;
+         cars[id].type=type
+       }
+     },
 }

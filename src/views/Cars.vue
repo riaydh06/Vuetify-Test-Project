@@ -17,6 +17,25 @@
         </v-flex>
     </v-layout>
 
+    <v-dialog v-model="dialog" min-width="300">
+        <v-card class="px-5 py-4">
+            <v-card-title class="text-h5 grey lighten-2">
+                Update Car
+            </v-card-title>
+
+            <v-form ref="form" v-model="valid" lazy-validation class="px-5">
+                <v-text-field v-model="editName" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+
+                <v-select v-model="editType" :items="items" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
+
+                <v-btn block color="success" class="mr-4" @click="updateCar">
+                    Submit
+                </v-btn>
+            </v-form>
+
+        </v-card>
+    </v-dialog>
+
     <v-layout>
         <v-flex>
             <v-card class="mx-auto" tile>
@@ -50,7 +69,7 @@
                             <v-list-item-content>
                                 <v-list-item class="text-primary">
                                     <div class="d-flex justify-start">
-                                        <img alt="Vue logo" src="../assets/edit.png" width="18" height="18" class="mr-2">
+                                        <img alt="Vue logo" src="../assets/edit.png" width="18" height="18" class="mr-2" @click="onClickEdit(i)">
                                         <img alt="Vue logo" src="../assets/remove.png" width="18" height="18" @click="deleteCar(i)">
                                     </div>
                                 </v-list-item>
@@ -72,10 +91,13 @@ import {
 export default {
     data() {
         return {
+            id: 0,
+            dialog: false,
             valid: true,
             name: '',
-
             type: null,
+            editName: '',
+            editType: null,
             nameRules: [
                 v => !!v || 'Name is required',
                 v => (v && v.length <= 10) || 'Name must be less than 10 characters',
@@ -103,13 +125,27 @@ export default {
                 type: this.type
             })
             this.$refs.form.reset()
-            this.name='';
-            this.type=''
+            this.name = '';
+            this.type = ''
         },
-        deleteCar(id){
+        deleteCar(id) {
             this.$store.commit('deleteCar', {
                 id
             })
+        },
+        onClickEdit(id) {
+            this.id = id;
+            this.dialog = true;
+            this.editName = this.cars[id].name
+            this.editType = this.cars[id].type
+        },
+        updateCar() {
+            this.$store.commit('updateCar', {
+                id: this.id,
+                name: this.editName,
+                type: this.editType
+            })
+            this.dialog = false
         }
     }
 }
