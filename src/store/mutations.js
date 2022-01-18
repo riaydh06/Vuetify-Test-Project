@@ -1,10 +1,5 @@
 export default {
-    addTodo({ todos }, text) {
-        todos.push({
-            text,
-            completed: false
-        })
-    },
+
     removeTodo: ({ todos }, todo) => {
         todos.splice(todos.indexOf(todo), 1)
     },

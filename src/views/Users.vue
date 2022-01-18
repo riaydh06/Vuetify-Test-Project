@@ -23,7 +23,7 @@
                 Update Car
             </v-card-title>
 
-            <v-form ref="form" v-model="valid" lazy-validation class="px-5">
+            <v-form  v-model="valid" lazy-validation class="px-5">
                 <v-text-field v-model="editName" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
                 <v-select v-model="editType" :items="items" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
@@ -38,7 +38,7 @@
 
     <v-layout>
         <v-flex>
-            <v-card class="mx-auto" tile>
+            <v-card class="mx-auto mb-16" tile>
                 <v-list dense>
                     <h1>CARS LIST</h1>
                     <v-list-item-group color="primary">

@@ -1,5 +1,4 @@
 export default {
-    todos: [],
     cars: [
         {id: 1, name: 'car1', type: 'Hatchback'},
         {id: 2, name: 'car2', type: 'Sedan'},
