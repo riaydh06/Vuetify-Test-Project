@@ -1,19 +1,4 @@
 export default {
-
-    removeTodo: ({ todos }, todo) => {
-        todos.splice(todos.indexOf(todo), 1)
-    },
-    markTodo({ todos }, todo) {
-        todos[todos.indexOf(todo)].completed = !todo.completed
-    },
-    markAllTodo({ todos }, completed) {
-        todos.forEach(todo => (todo.completed = completed))
-    },
-    clearCompleted({ todos }) {
-        todos.map(
-            todo => (todo.completed ? todos.splice(todos.indexOf(todo), 1) : null)
-        )
-    },
     addCar({ cars }, {name, type}) {
         cars.push({
             id: Math.floor(Math.random() * 1000),
@@ -32,7 +17,8 @@ export default {
          cars[id].type=type
        }
      },
-     addCities({ cities }, {name, country}) {
+
+    addCities({ cities }, {name, country}) {
         cities.push({
             id: Math.floor(Math.random() * 1000),
             name,
@@ -49,5 +35,9 @@ export default {
          cities[id].name=name;
          cities[id].country=country
        }
-     },
+    },
+
+    filterReport({ reports }, {date, time}) {
+      return  reports.filter(item=> item.date === date || item.time ===time)
+    },
 }

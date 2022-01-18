@@ -15,7 +15,6 @@
                         <v-time-picker v-model="timeStep" format="24hr"></v-time-picker>
                     </div>
                 </div>
-                {{timeStep}}
             </v-card>
         </v-flex>
     </v-layout>
@@ -75,13 +74,12 @@ export default {
             timeStep: '',
         }
     },
-
     computed: mapState({
         reports: state => state.reports,
     }),
 
     methods: {
-
+        
     }
 }
 </script>
@@ -93,13 +91,4 @@ export default {
     transition: all 0.5s;
 }
 
-li {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-li>span {
-    flex: 1;
-    max-width: 250px;
-}
 </style>
