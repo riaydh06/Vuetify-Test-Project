@@ -9,8 +9,8 @@ export default {
         {id: 1, type: 'operator', name: 'operator', email: 'email2@gmail.com', password: '123456'}
     ],
     cities: [
-        {id:1 , name: 'dhaka', country: 'bangladesh'},
-        {id:2 , name: 'gazipur', country: 'bangladesh'},
+        {id:1 , name: 'dhaka', country: 'Bangladesh'},
+        {id:2 , name: 'gazipur', country: 'Bangladesh'},
     ],
     reports: [
         { id: 1, operatorId: 1, operatorName: 'operator1', date: 'operator1', time: '123456'},

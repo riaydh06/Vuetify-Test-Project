@@ -32,7 +32,6 @@
                     Submit
                 </v-btn>
             </v-form>
-
         </v-card>
     </v-dialog>
 

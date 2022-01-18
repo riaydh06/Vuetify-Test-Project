@@ -7,7 +7,7 @@
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
-                    <v-select v-model="country" :items="countries" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
+                    <v-select v-model="country" :items="countries" :rules="[v => !!v || 'Item is required']" label="Country" required></v-select>
 
                     <v-btn block color="success" class="mr-4" @click="addCities">
                         Submit
@@ -26,13 +26,12 @@
             <v-form  v-model="valid" lazy-validation class="px-5">
                 <v-text-field v-model="editName" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
-                <v-select v-model="editCountry" :items="countries" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
+                <v-select v-model="editCountry" :items="countries" :rules="[v => !!v || 'Item is required']" label="Country" required></v-select>
 
                 <v-btn block color="success" class="mr-4" @click="updateCities">
                     Submit
                 </v-btn>
             </v-form>
-
         </v-card>
     </v-dialog>
 
@@ -126,7 +125,7 @@ export default {
             })
             this.$refs.form.reset()
             this.name = '';
-            this.country = ''
+            this.country = '';
         },
         deleteCities(id) {
             this.$store.commit('deleteCities', {
@@ -135,9 +134,11 @@ export default {
         },
         onClickEdit(id) {
             this.id = id;
+
+            console.log(this.cities[id].country)
             this.dialog = true;
-            this.editName = this.cities[id].name
-            this.editCountry = this.cities[id].country
+            this.editName = this.cities[id].name;
+            this.editCountry = this.cities[id].country;
         },
         updateCities() {
             this.$store.commit('updateCities', {
