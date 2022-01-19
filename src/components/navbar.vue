@@ -1,5 +1,5 @@
 <template>
-    <div id="nav" class="my-10">
+    <div id="nav" class="my-5">
       <router-link to="/">Home</router-link> |
       <router-link to="/cars">Cars</router-link> |
       <router-link to="/cities">Cities</router-link> |
