@@ -1,4 +1,11 @@
 export default {
+    users: [
+        {id: 1, type: 'manager', name: 'manager', email: 'email@gmail.com', password: '123456'},
+        {id: 2, type: 'operator', name: 'operator', email: 'email2@gmail.com', password: '123456'},
+        {id: 4, type: 'operator', name: 'operator2', email: 'email24@gmail.com', password: '123456'},
+        {id: 5, type: 'operator', name: 'operator6', email: 'email34@gmail.com', password: ''},
+        {id: 6, type: 'operator', name: 'operator7', email: 'email4@gmail.com', password: ''}
+    ],
     cars: [
         {id: 1, name: 'car1', type: 'Hatchback'},
         {id: 2, name: 'car2', type: 'Sedan'},
@@ -6,13 +13,6 @@ export default {
         {id: 6, name: 'car6', type: 'Sports car'},
         {id: 7, name: 'car7', type: 'Sports car'},
         {id: 9, name: 'car9', type: 'Sports car'},
-    ],
-    users: [
-        {id: 1, type: 'manager', name: 'manager', email: 'email@gmail.com', password: '123456'},
-        {id: 2, type: 'operator', name: 'operator', email: 'email2@gmail.com', password: '123456'},
-        {id: 4, type: 'operator', name: 'operator2', email: 'email24@gmail.com', password: '123456'},
-        {id: 5, type: 'operator', name: 'operator6', email: 'email34@gmail.com', password: ''},
-        {id: 6, type: 'operator', name: 'operator7', email: 'email4@gmail.com', password: ''}
     ],
     cities: [
         {id:1 , name: 'dhaka', operator: 2, operatorName: 'operator', car: 1, carName: 'car1'},

@@ -1,4 +1,14 @@
+import router from "../router"
+
 export default {
+    // login
+    login({ users }, {email, password}) {
+    const userIndex = users.findIndex(item=> item.email === email|| item.password === password )
+      
+      if(userIndex !== -1){
+        router.push('/')
+      }
+    },
     // car
     addCar({ cars }, {name, type}) {
         cars.push({

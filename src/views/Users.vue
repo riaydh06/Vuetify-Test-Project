@@ -165,14 +165,4 @@ export default {
     padding: 10px;
     transition: all 0.5s;
 }
-
-li {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-li>span {
-    flex: 1;
-    max-width: 250px;
-}
 </style>

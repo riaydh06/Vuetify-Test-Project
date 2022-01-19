@@ -13,6 +13,18 @@
   </v-app>
 </template>
 
+<script>
+export default {
+    data() {
+        return {
+            valid: true,
+            email: '',
+            password: '',
+        }
+    },
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
