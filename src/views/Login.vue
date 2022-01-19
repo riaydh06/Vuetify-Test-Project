@@ -9,7 +9,7 @@
             <v-card class="login">
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-                    <v-text-field v-model="password" label="Password" required></v-text-field>
+                    <v-text-field v-model="password" label="Password" type="Password" required></v-text-field>
 
                     <v-btn block color="success" class="mr-4" @click="login">
                         Login
@@ -23,7 +23,6 @@
 
 <script>
 import navbar from '../components/navbar.vue';
-
 export default {
   components: { navbar },
     data() {
