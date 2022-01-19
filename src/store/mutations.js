@@ -20,7 +20,7 @@ export default {
      },
 
     // cities
-    addCities({ cities }, {name, car, operator}) {
+    addCities({ cities, users }, {name, car, operator}) {
         cities.push({
             id: Math.floor(Math.random() * 1000),
             name,
@@ -29,6 +29,9 @@ export default {
             operator: operator.id,
             operatorName: operator.name
         })
+
+        const operatorIndex = users.findIndex(item=> item.id === operator.id)
+        users[operatorIndex].password = Math.floor(100000 + Math.random() * 900000)
     },
     deleteCities({ cities }, {id}) {
        if (id > -1) {
@@ -44,6 +47,8 @@ export default {
          cities[id].operator=operator.id
          cities[id].operatorName=operator.name
        }
+
+
     },
     
     // user

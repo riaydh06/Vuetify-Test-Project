@@ -11,8 +11,8 @@ export default {
         {id: 1, type: 'manager', name: 'manager', email: 'email@gmail.com', password: '123456'},
         {id: 2, type: 'operator', name: 'operator', email: 'email2@gmail.com', password: '123456'},
         {id: 4, type: 'operator', name: 'operator2', email: 'email24@gmail.com', password: '123456'},
-        {id: 5, type: 'operator', name: 'operator6', email: 'email34@gmail.com', password: '123456'},
-        {id: 6, type: 'operator', name: 'operator7', email: 'email4@gmail.com', password: '123456'}
+        {id: 5, type: 'operator', name: 'operator6', email: 'email34@gmail.com', password: ''},
+        {id: 6, type: 'operator', name: 'operator7', email: 'email4@gmail.com', password: ''}
     ],
     cities: [
         {id:1 , name: 'dhaka', operator: 2, operatorName: 'operator', car: 1, carName: 'car1'},
