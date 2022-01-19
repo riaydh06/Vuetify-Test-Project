@@ -9,6 +9,27 @@
 
                     <v-select v-model="country" :items="countries" :rules="[v => !!v || 'Item is required']" label="Country" required></v-select>
 
+                    <vue-csv-import v-model="csv" :map-fields="['Car', 'Operator']">
+                        <template slot="error">
+                            File type is invalid
+                        </template>
+
+                        <template slot="thead">
+                            <tr>
+                                <th>My Fields</th>
+                                <th>Column</th>
+                            </tr>
+                        </template>
+
+                        <template slot="next" slot-scope="{load}">
+                            <!-- <button @click.prevent="load">load!</button> -->
+                            <v-btn color="warning" class="mr-4" @click.prevent="load">
+                                load
+                            </v-btn>
+                        </template>
+
+                    </vue-csv-import>
+
                     <v-btn block color="success" class="mr-4" @click="addCities">
                         Submit
                     </v-btn>
@@ -23,7 +44,7 @@
                 Update Cities
             </v-card-title>
 
-            <v-form  v-model="valid" lazy-validation class="px-5">
+            <v-form ref="form2"  v-model="valid2" lazy-validation class="px-5">
                 <v-text-field v-model="editName" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
                 <v-select v-model="editCountry" :items="countries" :rules="[v => !!v || 'Item is required']" label="Country" required></v-select>
@@ -34,6 +55,8 @@
             </v-form>
         </v-card>
     </v-dialog>
+
+    {{csv}}
 
     <v-layout>
         <v-flex>
@@ -87,12 +110,21 @@ import {
     mapState,
 } from 'vuex';
 
+import {
+    VueCsvImport
+} from 'vue-csv-import';
+
 export default {
+    components: {
+        VueCsvImport
+    },
     data() {
         return {
+            csv: [],
             id: 0,
             dialog: false,
             valid: true,
+            valid2: true,
             name: '',
             country: null,
             editName: '',
@@ -118,14 +150,15 @@ export default {
 
     methods: {
         addCities() {
-            this.$refs.form.validate()
-            this.$store.commit('addCities', {
-                name: this.name,
-                country: this.country
-            })
-            this.$refs.form.reset()
-            this.name = '';
-            this.country = '';
+            if (this.$refs.form.validate()) {
+                this.$store.commit('addCities', {
+                    name: this.name,
+                    country: this.country
+                })
+                this.$refs.form.reset()
+                this.name = '';
+                this.country = '';
+            }
         },
         deleteCities(id) {
             this.$store.commit('deleteCities', {
@@ -134,19 +167,19 @@ export default {
         },
         onClickEdit(id) {
             this.id = id;
-
-            console.log(this.cities[id].country)
             this.dialog = true;
             this.editName = this.cities[id].name;
             this.editCountry = this.cities[id].country;
         },
         updateCities() {
-            this.$store.commit('updateCities', {
-                id: this.id,
-                name: this.editName,
-                country: this.editCountry
-            })
-            this.dialog = false
+            if (this.$refs.form2.validate()) {
+                this.$store.commit('updateCities', {
+                    id: this.id,
+                    name: this.editName,
+                    country: this.editCountry
+                })
+                this.dialog = false
+            }
         }
     }
 }

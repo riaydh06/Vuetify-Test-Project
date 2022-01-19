@@ -23,7 +23,7 @@
                 Update User
             </v-card-title>
 
-            <v-form v-model="valid" lazy-validation class="px-5">
+            <v-form ref="form2"  v-model="valid2" lazy-validation class="px-5">
                 <v-text-field v-model="editName" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
                 <v-text-field v-model="editEmail" :rules="emailRules" label="E-mail" required></v-text-field>
@@ -97,6 +97,7 @@ export default {
             id: 0,
             dialog: false,
             valid: true,
+            valid2: true,
             name: '',
             email: '',
             editName: '',
@@ -120,7 +121,7 @@ export default {
 
     methods: {
         addUser() {
-            this.$refs.form.validate()
+            if(this.$refs.form.validate()){
             this.$store.commit('addUser', {
                 name: this.name,
                 email: this.email
@@ -128,6 +129,7 @@ export default {
             this.$refs.form.reset()
             this.name = '';
             this.email = ''
+            }
         },
         deleteUser(id) {
             this.$store.commit('deleteUser', {
@@ -144,12 +146,14 @@ export default {
             
         },
         updateUser() {
+            if(this.$refs.form2.validate()){
             this.$store.commit('updateUser', {
                 id: this.id,
                 name: this.editName,
                 email: this.editEmail
             })
             this.dialog = false
+            }
         }
     }
 }

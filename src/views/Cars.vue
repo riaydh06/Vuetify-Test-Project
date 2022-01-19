@@ -23,7 +23,7 @@
                 Update Car
             </v-card-title>
 
-            <v-form  v-model="valid" lazy-validation class="px-5">
+            <v-form ref="form2" v-model="valid2" lazy-validation class="px-5">
                 <v-text-field v-model="editName" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
                 <v-select v-model="editType" :items="types" :rules="[v => !!v || 'Item is required']" label="Type" required></v-select>
@@ -93,6 +93,7 @@ export default {
             id: 0,
             dialog: false,
             valid: true,
+            valid2: true,
             name: '',
             type: null,
             editName: '',
@@ -118,14 +119,15 @@ export default {
 
     methods: {
         addCar() {
-            this.$refs.form.validate()
-            this.$store.commit('addCar', {
-                name: this.name,
-                type: this.type
-            })
-            this.$refs.form.reset()
-            this.name = '';
-            this.type = ''
+            if (this.$refs.form.validate()) {
+                this.$store.commit('addCar', {
+                    name: this.name,
+                    type: this.type
+                })
+                this.$refs.form.reset()
+                this.name = '';
+                this.type = ''
+            }
         },
         deleteCar(id) {
             this.$store.commit('deleteCar', {
@@ -139,12 +141,14 @@ export default {
             this.editType = this.cars[id].type
         },
         updateCar() {
-            this.$store.commit('updateCar', {
-                id: this.id,
-                name: this.editName,
-                type: this.editType
-            })
-            this.dialog = false
+            if (this.$refs.form2.validate()) {
+                this.$store.commit('updateCar', {
+                    id: this.id,
+                    name: this.editName,
+                    type: this.editType
+                })
+                this.dialog = false
+            }
         }
     }
 }

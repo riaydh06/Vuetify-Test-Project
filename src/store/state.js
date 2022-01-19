@@ -6,7 +6,7 @@ export default {
     ],
     users: [
         {id: 1, type: 'manager', name: 'manager', email: 'email@gmail.com', password: '123456'},
-        {id: 1, type: 'operator', name: 'operator', email: 'email2@gmail.com', password: '123456'}
+        {id: 2, type: 'operator', name: 'operator', email: 'email2@gmail.com', password: '123456'}
     ],
     cities: [
         {id:1 , name: 'dhaka', country: 'Bangladesh'},
