@@ -5,7 +5,7 @@
         <v-flex class="mb-15">
             <v-card class="car">
                 <h1>ADD CAR</h1>
-                
+
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
@@ -88,9 +88,7 @@
 </template>
 
 <script>
-import {
-    mapState,
-} from 'vuex';
+import {mapState} from 'vuex';
 import navbar from '../components/navbar.vue';
 
 export default {

@@ -132,9 +132,7 @@
 </template>
 
 <script>
-import {
-    VueCsvImport
-} from 'vue-csv-import';
+import { VueCsvImport} from 'vue-csv-import';
 import Navbar from '../components/navbar.vue';
 
 export default {
