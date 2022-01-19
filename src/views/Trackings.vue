@@ -3,8 +3,8 @@
     <navbar />
     <LMap :zoom="zoom" :center="center">
       <LTileLayer :url="url"></LTileLayer>
-      <LMarker v-for="(item, i) in cars" :key="i" :lat-lng="item.position"></LMarker>
-      <LMarker v-for="(item, i) in users" :key="i" :lat-lng="item.position"></LMarker>
+      <LMarker v-for="(item, i) in cars" :key="i+'c'" :lat-lng="item.position"></LMarker>
+      <LMarker v-for="(item, i) in users" :key="i+'0'" :lat-lng="item.position"></LMarker>
     </LMap>
   </v-container>
 </template>

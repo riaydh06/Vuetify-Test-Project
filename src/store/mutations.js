@@ -3,9 +3,10 @@ import router from "../router"
 export default {
     // login
     login({ users }, {email, password}) {
-    const userIndex = users.findIndex(item=> item.email === email|| item.password === password )
-      
-      if(userIndex !== -1){
+    const user = users.filter(item=> item.email === email && item.password === password )
+      if(user.length === 1){
+        localStorage.setItem('login', true)
+        localStorage.setItem('userType', user[0].type)
         router.push('/')
       }
     },
@@ -57,8 +58,6 @@ export default {
          cities[id].operator=operator.id
          cities[id].operatorName=operator.name
        }
-
-
     },
     
     // user
