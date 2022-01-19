@@ -2,6 +2,9 @@
 <v-container>
     <v-layout>
         <v-flex>
+            <div>
+                <img alt="Vue logo" src="../assets/logo.png">
+            </div>
             <v-card class="login">
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
@@ -34,7 +37,7 @@ export default {
     methods: {
         login() {
             if (this.$refs.form.validate()) {
-               const s = this.$store.commit('login', {
+                const s = this.$store.commit('login', {
                     email: this.email,
                     password: this.password
                 })

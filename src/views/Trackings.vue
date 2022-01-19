@@ -1,5 +1,6 @@
 <template>
-  <div style="height: 80vh">
+  <v-container style="height: 80vh">
+    <navbar />
     <LMap :zoom="zoom" :center="center">
       <LTileLayer :url="url"></LTileLayer>
       <LMarker :lat-lng="[47.413220, -1.219482]"></LMarker>
@@ -8,18 +9,20 @@
       <LMarker :lat-lng="[47.03220, -0.9482]"></LMarker>
       <LMarker :lat-lng="[46.03220, 2.9482]"></LMarker>
     </LMap>
-  </div>
+  </v-container>
 </template>
       
 <script>
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import Navbar from '../components/navbar.vue';
 
 export default {
   name: "Map",
   components: {
     LMap,
     LTileLayer,
-    LMarker
+    LMarker,
+    Navbar
   },
   data() {
     return {

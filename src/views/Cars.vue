@@ -1,5 +1,6 @@
 <template>
 <v-container>
+    <navbar />
     <v-layout>
         <v-flex class="mb-15">
             <v-card class="car">
@@ -86,8 +87,10 @@
 import {
     mapState,
 } from 'vuex';
+import navbar from '../components/navbar.vue';
 
 export default {
+  components: { navbar },
     data() {
         return {
             id: 0,

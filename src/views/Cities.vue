@@ -1,5 +1,6 @@
 <template>
 <v-container>
+    <navbar />
     <v-layout>
         <v-flex class="mb-15">
             <v-card class="cities">
@@ -134,10 +135,12 @@
 import {
     VueCsvImport
 } from 'vue-csv-import';
+import Navbar from '../components/navbar.vue';
 
 export default {
     components: {
-        VueCsvImport
+        VueCsvImport,
+        Navbar
     },
     data() {
         return {
