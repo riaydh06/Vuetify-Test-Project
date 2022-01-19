@@ -5,6 +5,7 @@
         <v-flex class="mb-15">
             <v-card class="car">
                 <h1>ADD CAR</h1>
+                
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
@@ -42,6 +43,7 @@
                 <v-list dense>
                     <h1>CARS LIST</h1>
                     <v-list-item-group color="primary">
+                        
                         <v-list-item>
                             <v-list-item-content>
                                 <v-list-item>ID</v-list-item>
@@ -56,6 +58,7 @@
                                 <v-list-item>ACTION</v-list-item>
                             </v-list-item-content>
                         </v-list-item>
+
                         <v-list-item v-for="(item, i) in cars" :key="i">
                             <v-list-item-content>
                                 <v-list-item v-text="item.id"></v-list-item>
@@ -75,6 +78,7 @@
                                 </v-list-item>
                             </v-list-item-content>
                         </v-list-item>
+
                     </v-list-item-group>
                 </v-list>
             </v-card>
