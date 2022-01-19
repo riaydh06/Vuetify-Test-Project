@@ -37,12 +37,10 @@ export default {
     methods: {
         login() {
             if (this.$refs.form.validate()) {
-                const s = this.$store.commit('login', {
+               this.$store.commit('login', {
                     email: this.email,
                     password: this.password
                 })
-
-                console.log(s)
                 this.$refs.form.reset();
                 this.email = '';
                 this.password = '';

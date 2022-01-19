@@ -3,17 +3,15 @@
     <navbar />
     <LMap :zoom="zoom" :center="center">
       <LTileLayer :url="url"></LTileLayer>
-      <LMarker :lat-lng="[47.413220, -1.219482]"></LMarker>
-      <LMarker :lat-lng="[46.193220, 4.82]"></LMarker>
-      <LMarker :lat-lng="[45.193220, 6.82]"></LMarker>
-      <LMarker :lat-lng="[47.03220, -0.9482]"></LMarker>
-      <LMarker :lat-lng="[46.03220, 2.9482]"></LMarker>
+      <LMarker v-for="(item, i) in cars" :key="i" :lat-lng="item.position"></LMarker>
+      <LMarker v-for="(item, i) in users" :key="i" :lat-lng="item.position"></LMarker>
     </LMap>
   </v-container>
 </template>
       
 <script>
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import { mapState } from 'vuex';
 import Navbar from '../components/navbar.vue';
 
 export default {
@@ -31,6 +29,10 @@ export default {
       center: [46.5322, 2.9482],
       bounds: null
     };
-  }
+  },
+  computed: mapState({
+        cars: state => state.cars,
+        users: state => state.users,
+    }),
 };
 </script>

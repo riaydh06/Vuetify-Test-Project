@@ -1,18 +1,18 @@
 export default {
     users: [
-        {id: 1, type: 'manager', name: 'manager', email: 'email@gmail.com', password: '123456'},
-        {id: 2, type: 'operator', name: 'operator', email: 'email2@gmail.com', password: '123456'},
-        {id: 4, type: 'operator', name: 'operator2', email: 'email24@gmail.com', password: '123456'},
-        {id: 5, type: 'operator', name: 'operator6', email: 'email34@gmail.com', password: ''},
-        {id: 6, type: 'operator', name: 'operator7', email: 'email4@gmail.com', password: ''}
+        {id: 1, type: 'manager', name: 'manager', email: 'email@gmail.com', password: '123456', position: [47.447533, -1.534342]},
+        {id: 2, type: 'operator', name: 'operator', email: 'email2@gmail.com', password: '123456', position: [47.413360, -1.334482]},
+        {id: 4, type: 'operator', name: 'operator2', email: 'email24@gmail.com', password: '123456', position: [47.43430, -1.239482]},
+        {id: 5, type: 'operator', name: 'operator6', email: 'email34@gmail.com', password: '', position: [47.413443, -1.113482]},
+        {id: 6, type: 'operator', name: 'operator7', email: 'email4@gmail.com', password: '', position: [47.4433434, -1.639482]}
     ],
     cars: [
-        {id: 1, name: 'car1', type: 'Hatchback'},
-        {id: 2, name: 'car2', type: 'Sedan'},
-        {id: 3, name: 'car3', type: 'Sports car'},
-        {id: 6, name: 'car6', type: 'Sports car'},
-        {id: 7, name: 'car7', type: 'Sports car'},
-        {id: 9, name: 'car9', type: 'Sports car'},
+        {id: 1, name: 'car1', type: 'Hatchback', position: [47.413320, -1.73482]},
+        {id: 2, name: 'car2', type: 'Sedan' , position: [47.4132220, -1.113482]},
+        {id: 3, name: 'car3', type: 'Sports car', position: [47.416220, -1.3482]},
+        {id: 6, name: 'car6', type: 'Sports car', position: [47.443320, -1.21382]},
+        {id: 7, name: 'car7', type: 'Sports car', position: [47.4154220, -1.813482]},
+        {id: 9, name: 'car9', type: 'Sports car', position: [47.432420, -1.313454]},
     ],
     cities: [
         {id:1 , name: 'dhaka', operator: 2, operatorName: 'operator', car: 1, carName: 'car1'},
@@ -31,5 +31,6 @@ export default {
     trackings: [
         {id:  1, type: 'operator', position: ''},
         {id:  3, type: 'car', position: ''}
-    ]
+    ],
+    position: [0,0]
 }

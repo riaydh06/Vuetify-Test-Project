@@ -39,8 +39,6 @@ export default {
             navigator.geolocation.getCurrentPosition(
                 position => {
                     this.userPosition = [position.coords.latitude, position.coords.longitude]
-                    console.log(position.coords.latitude);
-                    console.log(position.coords.longitude);
                 },
                 error => {
                     console.log(error.message);
