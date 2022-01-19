@@ -1,80 +1,51 @@
 <template>
-<div class="todo">
-    <form @submit.prevent="addTodo(text); text=''">
-        <input type="checkbox" title="mark all" @change="markAllTodo(!markAll); markAll = !markAll" />
-        <input type="text" placeholder="What must be done?" v-model="text" />
-        <button> Add Todo </button>
-    </form>
-    <ul>
-        <li v-for="(todo, index) in todos" :key="index">
-            <input type="checkbox" title="mark todo" @change="markTodo(todo)" :checked="todo.completed" />
-            <span :class="{completed: todo.completed}">{{ todo.text }}</span>
-            <button @click="removeTodo(todo)">x</button>
-        </li>
-    </ul>
-    <div>
-        <a href="#" @click="clearCompleted"> clear completed </a>
-    </div>
-    show:
-    <button @click="visible = 'all'"> all </button>
-    <button @click="visible = 'completed'"> completed </button>
-    <button @click="visible = 'pending'"> pending </button>
+<div style="height: 80vh">
+    <LMap :zoom="zoom" :center="center">
+        <LTileLayer :url="url"></LTileLayer>
+        <LMarker :lat-lng="userPosition"></LMarker>
+    </LMap>
 </div>
 </template>
 
 <script>
 import {
-    mapGetters,
-    mapMutations
-} from 'vuex';
+    LMap,
+    LTileLayer,
+    LMarker
+} from "vue2-leaflet";
 
 export default {
+    name: "Map",
+    components: {
+        LMap,
+        LTileLayer,
+        LMarker
+    },
     data() {
         return {
-            text: '',
-            visible: 'all',
-            markAll: false
+            url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+            zoom: 6,
+            center: [23.867, 90.387],
+            bounds: null,
+            userPosition: [0,0]
+        };
+    },
+    methods: {
+        getCurrentPosition() {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    this.userPosition= [position.coords.latitude,position.coords.longitude ]
+                    console.log(position.coords.latitude);
+                    console.log(position.coords.longitude);
+                },
+                error => {
+                    console.log(error.message);
+                },
+            )
         }
     },
-
-    computed: {
-        todos() {
-            return this.$store.getters[this.visible]
-        },
-        ...mapGetters(['pending', 'completed', 'all'])
+    mounted() {
+        this.getCurrentPosition()
     },
-
-    methods: mapMutations([
-        'addTodo',
-        'removeTodo',
-        'markTodo',
-        'markAllTodo',
-        'clearCompleted'
-    ])
 }
 </script>
-
-<style>
-.todo {
-    text-align: left;
-    padding: 5px;
-    margin: auto;
-    transition: all 0.5s;
-    max-width: 300px;
-}
-
-.completed {
-    color: #888;
-    text-decoration: line-through;
-}
-
-li {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-li>span {
-    flex: 1;
-    max-width: 250px;
-}
-</style>
