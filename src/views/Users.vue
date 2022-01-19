@@ -47,8 +47,12 @@
                                 <v-list-item>ID</v-list-item>
                             </v-list-item-content>
                             <v-list-item-content>
+                                <v-list-item>TYPE</v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
                                 <v-list-item>NAME</v-list-item>
                             </v-list-item-content>
+
                             <v-list-item-content>
                                 <v-list-item>EMAIL</v-list-item>
                             </v-list-item-content>
@@ -61,6 +65,9 @@
                                 <v-list-item v-text="item.id"></v-list-item>
                             </v-list-item-content>
                             <v-list-item-content>
+                                <v-list-item v-text="item.type"></v-list-item>
+                            </v-list-item-content>
+                            <v-list-item-content>
                                 <v-list-item v-text="item.name"></v-list-item>
                             </v-list-item-content>
                             <v-list-item-content>
@@ -68,8 +75,8 @@
                             </v-list-item-content>
                             <v-list-item-content>
                                 <v-list-item class="text-primary">
-                                    <div class="d-flex justify-start">
-                                        <img alt="Vue logo" src="../assets/edit.png" width="18" height="18" class="mr-2" @click="onClickEdit(item.id)">
+                                    <div v-if="item.type === 'operator'" class="d-flex justify-start">
+                                        <img alt="Vue logo" src="../assets/edit.png" width="18" height="18" class="mr-2" @click="onClickEdit(item)">
                                         <img alt="Vue logo" src="../assets/remove.png" width="18" height="18" @click="deleteUser(item.id)">
                                     </div>
                                 </v-list-item>
@@ -107,7 +114,7 @@ export default {
 
     computed: {
         getUser() {
-            return this.$store.state.users.filter(item => item.type === 'operator')
+            return this.$store.state.users
         },
     },
 
@@ -127,13 +134,14 @@ export default {
                 id
             })
         },
-        onClickEdit(id) {
-            console.log(id)
-            this.id = id;
-            this.dialog = true;
-            console.log(this.getUser.filter(item=> item.id ===id))
-            this.editName = this.getUser.filter(item=> item.id ===id)?.[0].name;
-            this.editEmail = this.getUser.filter(item=> item.id ===id)?.[0].email;
+        onClickEdit(data) {
+            if(data.type === 'operator'){
+                this.id = data.id;
+                this.dialog = true;
+                this.editName = this.getUser.filter(item => item.id === data.id) ?.[0].name;
+                this.editEmail = this.getUser.filter(item => item.id === data.id) ?.[0].email;
+            }
+            
         },
         updateUser() {
             this.$store.commit('updateUser', {
