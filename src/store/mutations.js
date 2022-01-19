@@ -20,11 +20,14 @@ export default {
      },
 
     // cities
-    addCities({ cities }, {name, country}) {
+    addCities({ cities }, {name, car, operator}) {
         cities.push({
             id: Math.floor(Math.random() * 1000),
             name,
-            country
+            car: car.id,
+            carName: car.name,
+            operator: operator.id,
+            operatorName: operator.name
         })
     },
     deleteCities({ cities }, {id}) {
@@ -32,10 +35,14 @@ export default {
         cities.splice(id, 1);
       }
     },
-    updateCities({ cities }, {id, name, country}) {
+    updateCities({ cities }, {id, name, car, operator}) {
+      console.log(name, car, operator)
         if (id > -1) {
          cities[id].name=name;
-         cities[id].country=country
+         cities[id].car=car.id
+         cities[id].carName=car.name
+         cities[id].operator=operator.id
+         cities[id].operatorName=operator.name
        }
     },
     
