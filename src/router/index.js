@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Cars from '../views/Cars.vue'
-import Cities from '../views/Cities.vue'
-import Login from '../views/Login.vue'
-import Navigation from '../views/Navigation.vue'
-import Reports from '../views/Reports.vue'
-import Trackings from '../views/Trackings.vue'
-import Users from '../views/Users.vue'
+import Home from '../contaniners/Home.vue'
+import Cars from '../contaniners/Cars.vue'
+import Cities from '../contaniners/Cities.vue'
+import Login from '../contaniners/Login.vue'
+import Navigation from '../contaniners/Navigation.vue'
+import Reports from '../contaniners/Reports.vue'
+import Trackings from '../contaniners/Trackings.vue'
+import Users from '../contaniners/Users.vue'
 
 Vue.use(VueRouter)
 
